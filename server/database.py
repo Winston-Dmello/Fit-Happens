@@ -87,3 +87,8 @@ class DB:
             return True
         else:
             return False
+        
+    def get_runs_by_username(self, username):
+        self.cursor.execute("Use FitHappens")
+        self.cursor.execute("SELECT * FROM Runs WHERE Username = %s", (username,))
+        return self.cursor.fetchall()
