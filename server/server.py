@@ -1,21 +1,17 @@
 import asyncio
-from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect
-from fastapi.responses import JSONResponse
+from fastapi import FastAPI, Form, HTTPException, Request, WebSocket, WebSocketDisconnect
+from fastapi.responses import JSONResponse, HTMLResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 import uvicorn
-from pydantic import BaseModel
+from models import *
 from database import DB
 
 db = DB()
 
-class Message(BaseModel):
-    Pose: str
-
-class Scoreboard(BaseModel):
-    username: str
-    score: float
-
-
 app = FastAPI()
+app.mount("/static", StaticFiles(directory="static"), name="static")
+templates = Jinja2Templates(directory="templates")
 
 global msg
 msg = None
@@ -38,6 +34,28 @@ async def web_endpoint(websocket: WebSocket):
                 pass 
     except WebSocketDisconnect:
         print("Connection disconnected")
+
+@app.get("/", response_class=HTMLResponse)
+async def read_root(request: Request):
+    return templates.TemplateResponse("home.html", {"request": request})
+
+
+@app.post("/login")
+async def login(username: str = Form(...), password: str = Form(...)):
+    user = User(username=username, password=password)
+
+    if db.user_exists(user.username):
+        if db.login_user(user.username, user.password):
+            return JSONResponse({"success":"true"})
+        else:
+            raise HTTPException(status_code=411, detail="Incorrect Password")
+    else:
+        try:
+            db.create_user(user.username, user.password)
+            return JSONResponse({"success":"true"})
+        except:
+            raise HTTPException(status_code=500, detail="Failed to create user")
+
 
 @app.post("/message")
 async def sreceive(message: Message):

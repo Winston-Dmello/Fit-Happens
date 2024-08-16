@@ -1,0 +1,86 @@
+input{
+    border: none;
+    background: none;
+    border-bottom: 2px solid grey;
+    outline: none;
+    color: whitesmoke;
+    width: 15vw;
+    font-size: 1.5vw;
+    transition: border-bottom 0.4s ease-in-out;
+}
+input:focus{
+    border-bottom: 2px solid whitesmoke;
+}
+
+.grid-container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    height: 100vh;
+}
+.grid-item-1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+img {
+    max-width: 100%;
+    width: 700px;
+    height: 700px;
+    margin-bottom: 0;
+    position: absolute;
+    bottom: 0;
+}
+.grid-item-3{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title{
+    font-size: 3.5vw;
+    height: auto;
+    color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5vw;
+    margin-left: 2vw;
+}
+.title h1{
+    margin: 0;
+}
+
+.form-container{
+    width: 30vw;
+    background-color: #0d2261;
+    border: 1px solid whitesmoke;
+    border-radius: 2vw;
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;  
+    gap: 3vh;
+}
+.form-container h2{
+    font-size: 1.5vw;
+}
+
+.submit-btn{
+    margin-top: 2vh;
+    border: 2px solid grey;
+    width: 16vw;
+    border-radius: 2vw;
+    height: 1.7vw;
+    font-size: 1.7vh;
+    background-color: #0d2261;
+    color: whitesmoke;
+    transition: border 0.4s ease-in-out;
+}
+.submit-btn:hover{
+    border: 2px solid whitesmoke;
+}

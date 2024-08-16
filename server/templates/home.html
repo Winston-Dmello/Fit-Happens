@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="../static/home.css">
+{% endblock %}
+
+{% block content %}
+    <div class="grid-container">
+        <div class="grid-item-1">
+            <div class="title">
+                <h1>Fit Happens</h1>
+            </div>
+        </div>
+        <div class="grid-item">
+            <img src="../static/output_image-removebg-preview.png" alt="">
+        </div>
+        <div class="grid-item-3">
+                <form action="/login" method="post" class="form-container">
+                    <h2>Play now!</h2>
+                    <div>
+                        <input type="text" name="username" placeholder="Username: " required>
+                    </div>
+                    <div>
+                        <input type="password" name="password" id="password" placeholder="Password: " required>
+                    </div>
+                    <button type="submit" class="submit-btn">Login</button>
+                </form>
+        </div>
+    </div>
+{% endblock %}
