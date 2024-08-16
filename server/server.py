@@ -1,6 +1,6 @@
 import asyncio
 from fastapi import FastAPI, Form, HTTPException, Request, WebSocket, WebSocketDisconnect
-from fastapi.responses import JSONResponse, HTMLResponse
+from fastapi.responses import JSONResponse, HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import uvicorn
@@ -46,16 +46,19 @@ async def login(username: str = Form(...), password: str = Form(...)):
 
     if db.user_exists(user.username):
         if db.login_user(user.username, user.password):
-            return JSONResponse({"success":"true"})
+            return RedirectResponse(url="/dashboard", status_code=302)
         else:
             raise HTTPException(status_code=411, detail="Incorrect Password")
     else:
         try:
             db.create_user(user.username, user.password)
-            return JSONResponse({"success":"true"})
+            return RedirectResponse(url="/dashboard", status_code=302)
         except:
             raise HTTPException(status_code=500, detail="Failed to create user")
 
+@app.get("/dashboard")
+async def dashboard(request: Request):
+    return templates.TemplateResponse("dashboard.html",{"request":request})
 
 @app.post("/message")
 async def sreceive(message: Message):

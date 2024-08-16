@@ -3,10 +3,12 @@ from mysql import connector
 class DB:
     def __init__(self):
         # Establish a connection to the MySQL server
+        #root
+        #root1234
         connection_config = {
             "host": "localhost",
-            "user": "root",
-            "password": "root1234"
+            "user": "nanda",
+            "password": "newpassword"
         }
         self.db = connector.connect(**connection_config)
         self.cursor = self.db.cursor()
