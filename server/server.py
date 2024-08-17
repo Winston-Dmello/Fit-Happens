@@ -41,20 +41,20 @@ async def read_root(request: Request):
 
 
 @app.post("/login")
-async def login(username: str = Form(...), password: str = Form(...)):
+async def login(request: Request, username: str = Form(...), password: str = Form(...)):
     user = User(username=username, password=password)
 
     if db.user_exists(user.username):
         if db.login_user(user.username, user.password):
             return RedirectResponse(url="/dashboard", status_code=302)
         else:
-            raise HTTPException(status_code=411, detail="Incorrect Password")
+            return templates.TemplateResponse("home.html",{"request":request,"error_message":"Incorrect Password"})
     else:
         try:
             db.create_user(user.username, user.password)
             return RedirectResponse(url="/dashboard", status_code=302)
         except:
-            raise HTTPException(status_code=500, detail="Failed to create user")
+            return templates.TemplateResponse("home.html", {"request":request, "error_message":"Failed to create user"})
 
 @app.get("/dashboard")
 async def dashboard(request: Request):
