@@ -16,6 +16,9 @@ templates = Jinja2Templates(directory="templates")
 global msg
 msg = None
 
+global spawn
+spawn = None
+
 @app.websocket("/ws")
 async def web_endpoint(websocket: WebSocket):
     await websocket.accept()
@@ -27,6 +30,25 @@ async def web_endpoint(websocket: WebSocket):
                 print(data)
                 await websocket.send_json(data)
                 msg = None
+            try:
+                # Use a non-blocking receive with a timeout
+                await asyncio.wait_for(websocket.receive_text(), timeout=0.1)
+            except asyncio.TimeoutError:
+                pass 
+    except WebSocketDisconnect:
+        print("Connection disconnected")
+
+@app.websocket("/ws2")
+async def web_socket(websocket: WebSocket):
+    await websocket.accept()
+    try:
+        while True:
+            global spawn
+            if spawn:
+                data = {"Spawn":spawn}
+                print(data)
+                await websocket.send_json(data)
+                spawn = None
             try:
                 # Use a non-blocking receive with a timeout
                 await asyncio.wait_for(websocket.receive_text(), timeout=0.1)
@@ -83,5 +105,13 @@ async def getscoreboard():
     data = db.get_scoreboard()
     return JSONResponse(content=data)
 
+@app.post("/spawn")
+async def create(sp: Spawn):
+    global spawn
+    spawn = sp.Object
+    try:
+        return {"status": "Spawn added"}
+    except Exception as e:
+        raise HTTPException(statuscode=500, detail=str(e))
 if __name__ == "__main__":
-    uvicorn.run(app,host="localhost", port=8000)
+    uvicorn.run(app,host="192.168.193.27", port=8000)

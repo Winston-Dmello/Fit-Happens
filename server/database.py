@@ -7,8 +7,8 @@ class DB:
         #root1234
         connection_config = {
             "host": "localhost",
-            "user": "nanda",
-            "password": "newpassword"
+            "user": "root",
+            "password": "root1234"
         }
         self.db = connector.connect(**connection_config)
         self.cursor = self.db.cursor()
@@ -89,3 +89,8 @@ class DB:
             return True
         else:
             return False
+        
+    def get_runs_by_username(self, username):
+        self.cursor.execute("Use FitHappens")
+        self.cursor.execute("SELECT * FROM Runs WHERE Username = %s", (username,))
+        return self.cursor.fetchall()
