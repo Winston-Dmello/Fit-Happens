@@ -8,6 +8,9 @@ class User(BaseModel):
 class Message(BaseModel):
     Pose: str
 
+class Spawn(BaseModel):
+    Object: str
+
 class Scoreboard(BaseModel):
     username: str
     score: float
