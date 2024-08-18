@@ -9,14 +9,14 @@
     {% if some_value %}
         <div class="anal-container">
             <div class="g1">
-                <div>Current Run</div>
+                <div style="color: rgb(3, 161, 3);">Current Run</div>
                 <img src="data:image/png;base64,{{ some_value[0] }}" alt="Pie Chart">
-                <div>{{some_value[5]}}</div>
+                <div style="color: red;">{{some_value[5]}}</div>
             </div>
             <div class="g2">
-                <div>Average</div>
+                <div style="color: rgb(3, 161, 3);">Average</div>
                 <img src="data:image/png;base64,{{ some_value[1] }}" alt="Pie Chart">
-                <div>{{some_value[4]}}</div>
+                <div style="color: red;">{{some_value[4]}}</div>
             </div>
             <div class="g3">
                 <img src="data:image/png;base64,{{ some_value[2] }}" alt="Pie Chart" style="width: 34vw; height: 20vw;">
