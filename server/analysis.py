@@ -4,9 +4,10 @@ from io import BytesIO
 import base64
 
 
-db = DB()
+
 
 def analyse_runs(username):
+    db = DB()
     runs = db.get_runs_by_username(username)
 
     cur_run = [runs[0][5], runs[0][6], runs[0][7]]
@@ -42,7 +43,7 @@ def analyse_runs(username):
     
     max_frequency = max(death_by.values())
     max_keys = [key for key, value in death_by.items() if value == max_frequency]
-
+    print(max_keys)
     s = "You died most times by"
     for i in max_keys:
         s += f", {i}"
@@ -55,8 +56,9 @@ def analyse_runs(username):
 
 
 def pie_chart_run(data):
-    plt.figure(figsize=(6,6))
-    labels = ["Jumping Jacks", "Squats", "Dodges"]
+    plt.figure(figsize=(4,4))
+
+    labels = [f"Jumping Jacks: {data[0]}", f"Squats: {data[1]}", f"Dodges: {data[2]}"]
 
     plt.pie(data, labels=labels, autopct='%1.1f%%')
 
