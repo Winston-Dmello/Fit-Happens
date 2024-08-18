@@ -61,6 +61,18 @@ async def web_socket(websocket: WebSocket):
 async def read_root(request: Request):
     return templates.TemplateResponse("home.html", {"request": request})
 
+@app.get("/load_start_game", response_class=HTMLResponse)
+async def load_start_game(request: Request):
+    return templates.TemplateResponse("startGame.html", {"request": request})
+
+@app.get("/load_analysis", response_class=HTMLResponse)
+async def load_analysis(request: Request):
+    return templates.TemplateResponse("Analysis.html", {"request": request})
+
+@app.get("/load_about_us", response_class=HTMLResponse)
+async def load_about_us(request: Request):
+    return templates.TemplateResponse("Aboutus.html", {"request": request})
+
 
 @app.post("/login")
 async def login(request: Request, username: str = Form(...), password: str = Form(...)):
@@ -114,4 +126,4 @@ async def create(sp: Spawn):
     except Exception as e:
         raise HTTPException(statuscode=500, detail=str(e))
 if __name__ == "__main__":
-    uvicorn.run(app,host="192.168.193.27", port=8000)
+    uvicorn.run(app,host="localhost", port=8000)

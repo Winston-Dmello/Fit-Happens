@@ -1,31 +1,101 @@
 .container{
     display: flex;
-    width: 100vw;
-    height: 100vh;
+    width: 95vw;
+    height: 95vh;
+    background-color: white;
     justify-content: center;
     align-items: center;
+    margin-top:2.5vh;
+    border-radius: 2vw;
 }
 .grid-container{
     display: grid;
     grid-template-columns: 1fr 3fr;
-    width: 99vw;
-    height: 99vh;
+    width: 95vw;
+    height: 95vh;   
 }
 .grid-item-1{
     display: flex;
     flex-direction: column;
-    border-right: 2px solid whitesmoke;
 }
 .grid-item-1 button{
     height: 7vh;
     border: none;
-    background-color: #0d2261;
+    border: 1px solid grey;
+    background-color: #00796B;
     color:whitesmoke;
     font-size: 2.5vh;
+    margin-left: 0.5vw;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
     transition: background-color 0.1s ease-in-out;
+    
 }
 .grid-item-1 button:hover{
-    background-color: wheat;
+    background-color: #1e998b;
 }
 
+.links{
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+    margin-left: 0.7vw;
+}
+.links div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 7vh;
+    background-color: #00796B;
+    margin-bottom: 1vh;
+    transition: background-color 0.4s ease-in-out;
+}
+.links div:hover{
+    background-color: #1e998b;
+}
+.links div a{
+    color: whitesmoke;
+    text-decoration: none;
+    font-weight: bold;
+}
+.question{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 7vh;
+    font-size: 2.5vh;
+    color: black;
+}  
+.tip{
+    background-color: #00796B;
+    width: 100%;
+    height: 90%;
+    display: flex;
+    align-items: center;  
+    
+    justify-content: center;
+    flex-direction: column;
+    gap: 2vh;
+}
+.tip-title{
+    font-size: 3.5vh;
+    color: #FFD700;
+    margin-top: 1vh;
+}
+.tip-text{
+    width: fit-content;
+    font-size: 1.2vw;
+    margin-left: 1vh;
+}
+.grid-item-2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.inner-div{
+    width: 98%;
+    height: 98%;
+    border: 2px solid #1e998b;
+    border-radius: 2vw;
+}
 

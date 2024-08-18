@@ -10,12 +10,24 @@
     <div class="container">
         <div class="grid-container">
             <div class="grid-item-1">
-                <button>Play Game</button>
-                <button>Analysis</button>
-                <button>Not Sure</button>
+                <div class="question">Dashboard</div>
+                <div class="links">
+                    <div><a href="{{ url_for('load_start_game') }}">Play Game</a></div>
+                    <div><a href="{{ url_for('load_analysis') }}">Analysis</a></div>
+                    <div style="margin-bottom: 2vh;"><a href="{{ url_for('load_about_us') }}">About Us</a></div>
+                </div>
+                <div class="tip">
+                <!--<div class="tip-title">Note: </div>
+                    <div class="tip-text">If you hit an obstacle, just run again. It's all free anyway!</div>
+                -->
+                </div>
             </div>
             <div class="grid-item-2">
-                
+                <div class="inner-div">
+                    {% block dashboard_content %}
+        
+                    {% endblock %}
+                </div>
             </div>
         </div>
     </div>
