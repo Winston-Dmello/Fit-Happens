@@ -128,14 +128,14 @@ async def login(request: Request, username: str = Form(...), password: str = For
     if db.user_exists(user.username):
         if db.login_user(user.username, user.password):
             run["Username"] = user.username
-            return RedirectResponse(url="/dashboard", status_code=302)
+            return RedirectResponse(url="/load_start_game", status_code=302)
         else:
             return templates.TemplateResponse("home.html",{"request":request,"error_message":"Incorrect Password"})
     else:
         try:
             db.create_user(user.username, user.password)
             run["Username"] = user.username
-            return RedirectResponse(url="/dashboard", status_code=302)
+            return RedirectResponse(url="/load_start_game", status_code=302)
         except:
             return templates.TemplateResponse("home.html", {"request":request, "error_message":"Failed to create user"})
 
