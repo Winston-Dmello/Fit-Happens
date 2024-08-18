@@ -15,6 +15,7 @@
     async function handleClick() {
         const button = document.getElementById("startButton");
         button.disabled = true; // Disable the button initially
+        button.remove()
 
         try {
             const response = await fetch("http://192.168.193.27:8000/start"); // Send a request to start the game
