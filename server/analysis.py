@@ -5,9 +5,10 @@ from io import BytesIO
 import base64
 
 
-db = DB()
+
 
 def analyse_runs(username):
+    db = DB()
     runs = db.get_runs_by_username(username)
 
     cur_run = [runs[0][5], runs[0][6], runs[0][7]]
@@ -93,6 +94,7 @@ def generate_line_graph(datasets, labels, time_labels):
 
 
 def decide_spawner(username):
+    db = DB()
     runs = db.get_runs_by_username(username)
 
     death_by = {

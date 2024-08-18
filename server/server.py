@@ -85,7 +85,7 @@ async def load_start_game(request: Request):
 @app.get("/load_analysis", response_class=HTMLResponse)
 async def load_analysis(request: Request):
     some_value = analyse_runs(run["Username"])
-    return templates.TemplateResponse("Analysis.html", {"request": request})
+    return templates.TemplateResponse("Analysis.html", {"request": request, "some_value":some_value})
 
 @app.get("/load_about_us", response_class=HTMLResponse)
 async def load_about_us(request: Request):
@@ -149,4 +149,4 @@ async def create(sp: Spawn):
     except Exception as e:
         raise HTTPException(statuscode=500, detail=str(e))
 if __name__ == "__main__":
-    uvicorn.run(app,host="192.168.193.27", port=8000)
+    uvicorn.run(app,host="localhost", port=8000)
