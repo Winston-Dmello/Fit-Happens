@@ -6,22 +6,28 @@
 
 
 {% block dashboard_content %}
-    <div class="anal-container">
-        <div class="g1">
-            <div>Current Run</div>
-            <img src="data:image/png;base64,{{ some_value[0] }}" alt="Pie Chart">
-            <div>{{some_value[5]}}</div>
+    {% if some_value %}
+        <div class="anal-container">
+            <div class="g1">
+                <div>Current Run</div>
+                <img src="data:image/png;base64,{{ some_value[0] }}" alt="Pie Chart">
+                <div>{{some_value[5]}}</div>
+            </div>
+            <div class="g2">
+                <div>Average</div>
+                <img src="data:image/png;base64,{{ some_value[1] }}" alt="Pie Chart">
+                <div>{{some_value[4]}}</div>
+            </div>
+            <div class="g3">
+                <img src="data:image/png;base64,{{ some_value[2] }}" alt="Pie Chart" style="width: 34vw; height: 20vw;">
+            </div>
+            <div class="g4">
+                <img src="data:image/png;base64,{{ some_value[3] }}" alt="Pie Chart" style="width: 34vw; height: 20vw;">
+            </div>
         </div>
-        <div class="g2">
-            <div>Average</div>
-            <img src="data:image/png;base64,{{ some_value[1] }}" alt="Pie Chart">
-            <div>{{some_value[4]}}</div>
+    {% else %}
+        <div class="anal-container2">
+            <div class="text" style="font-size: 1.5vw;">There's nothing to see here!</div>
         </div>
-        <div class="g3">
-            <img src="data:image/png;base64,{{ some_value[2] }}" alt="Pie Chart" style="width: 34vw; height: 20vw;">
-        </div>
-        <div class="g4">
-            <img src="data:image/png;base64,{{ some_value[3] }}" alt="Pie Chart" style="width: 34vw; height: 20vw;">
-        </div>
-    </div>
+    {% endif %}
 {% endblock %}

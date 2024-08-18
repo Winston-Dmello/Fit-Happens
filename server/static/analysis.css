@@ -42,3 +42,12 @@
 .cur-run{
     margin-left: 2vw;
 }
+
+.anal-container2{
+    width: 100%;
+    height: 100%;
+    border-radius: 2vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
