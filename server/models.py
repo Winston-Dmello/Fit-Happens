@@ -14,3 +14,7 @@ class Spawn(BaseModel):
 class Scoreboard(BaseModel):
     username: str
     score: float
+
+class Score_Death(BaseModel):
+    Score: str
+    death: str

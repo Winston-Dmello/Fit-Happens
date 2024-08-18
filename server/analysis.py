@@ -57,9 +57,12 @@ def analyse_runs(username):
 
 
 def pie_chart_run(data):
-    plt.figure(figsize=(6,6))
+    plt.figure(figsize=(4,4))
     labels = [f"Jumping Jacks: {data[0]}", f"Squats: {data[1]}", f"Dodges: {data[2]}"]
-
+    # Check if any of the values is zero
+    if any(value == 0 for value in data):
+        # Replace zero values with a small non-zero value
+        data = [value if value != 0 else 0.001 for value in data]
     plt.pie(data, labels=labels, autopct='%1.1f%%')
 
     buf = BytesIO()
@@ -98,14 +101,14 @@ def decide_spawner(username):
     runs = db.get_runs_by_username(username)
 
     death_by = {
-        "box": 0,
-        "hurdle": 0,
-        "pipe": 0
+        "box": 1,
+        "hurdle": 1,
+        "pipe": 1
                 }
 
     for run in runs:
         death_by[run[4]] += 1
 
-    selected_option = random.choice(list(death_by.keys()), weights=list(death_by.values()))
+    selected_option = random.choices(list(death_by.keys()), weights=list(death_by.values()))[0]
 
     return(selected_option)

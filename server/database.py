@@ -7,8 +7,8 @@ class DB:
         #newpassword
         connection_config = {
             "host": "localhost",
-            "user": "nanda",
-            "password": "newpassword"
+            "user": "root",
+            "password": "root1234"
         }
         self.db = connector.connect(**connection_config)
         self.cursor = self.db.cursor()
@@ -98,5 +98,5 @@ class DB:
     def insert_run(self, runs):
         self.cursor.execute("Use FitHappens")
         self.cursor.execute("INSERT INTO Runs (username, date, score, death_by, jump_count, duck_count, dodge_count) VALUES (%s, CURDATE(), %s, %s, %s, %s, %s)", 
-                                (runs["Username"],  runs["Score"], "Obesity", runs["JumpingJack"], runs["Squat"], runs["Dodge"]))
+                                (runs["Username"],  runs["Score"], runs["Death"], runs["JumpingJack"], runs["Squat"], runs["Dodge"]))
         self.db.commit()
