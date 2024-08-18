@@ -1,5 +1,13 @@
 {% extends "dashboard.html" %}
 
 {% block dashboard_content %}
-    <h1>Start Game</h1>
+    <button onclick="handleClick()">Start Game</button>
+    <script>
+        async function handleClick(){
+
+            const response = await fetch("http://localhost:8000/start");
+            let data = response.json();
+            console.log(data);
+        }
+    </script>
 {% endblock %}

@@ -5,7 +5,7 @@
     border-radius: 2vw;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 2fr 2fr;
 }
 .g1{
     grid-row: 1;
@@ -13,13 +13,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 .g2{
     grid-row: 1;
     grid-column: 2;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 .cur-run{
     margin-left: 2vw;

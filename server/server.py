@@ -148,5 +148,11 @@ async def create(sp: Spawn):
         return {"status": "Spawn added"}
     except Exception as e:
         raise HTTPException(statuscode=500, detail=str(e))
+    
+@app.get("/start")
+async def start():
+    return JSONResponse({"success":"false"})
+
 if __name__ == "__main__":
     uvicorn.run(app,host="localhost", port=8000)
+
