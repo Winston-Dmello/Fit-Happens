@@ -7,8 +7,8 @@ class DB:
         #root1234
         connection_config = {
             "host": "localhost",
-            "user": "nanda",
-            "password": "newpassword"
+            "user": "root",
+            "password": "root1234"
         }
         self.db = connector.connect(**connection_config)
         self.cursor = self.db.cursor()
@@ -36,7 +36,7 @@ class DB:
         # Create the Runs table if it doesn't exist
         self.cursor.execute("""
             CREATE TABLE IF NOT EXISTS Runs (
-                runid VARCHAR(50) PRIMARY KEY,
+                runid INT AUTO_INCREMENT PRIMARY KEY,
                 username VARCHAR(50),
                 date DATE,
                 score INT,
@@ -92,5 +92,11 @@ class DB:
         
     def get_runs_by_username(self, username):
         self.cursor.execute("Use FitHappens")
-        self.cursor.execute("SELECT * FROM Runs WHERE Username = %s", (username,))
+        self.cursor.execute("SELECT * FROM Runs WHERE Username = %s ORDER BY RunID DESC LIMIT 11", (username,))
         return self.cursor.fetchall()
+    
+    def insert_run(self, runs):
+        self.cursor.execute("Use FitHappens")
+        self.cursor.execute("INSERT INTO Runs (username, date, score, death_by, jump_count, duck_count, dodge_count) VALUES (%s, CURDATE(), %s, %s, %s, %s, %s)", 
+                                (runs["Username"],  runs["Score"], "Obesity", runs["JumpingJack"], runs["Squat"], runs["Dodge"]))
+        self.db.commit()
