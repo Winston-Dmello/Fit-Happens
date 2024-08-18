@@ -5,8 +5,6 @@ from io import BytesIO
 import base64
 
 
-
-
 def analyse_runs(username):
     db = DB()
     runs = db.get_runs_by_username(username)
@@ -49,11 +47,14 @@ def analyse_runs(username):
     for i in max_keys:
         s += f" {i},"
 
-    line_chart = generate_line_graph([scores, jumps, squats, dodges], ["Scores","Jumps", "Squats", "Dodges"], list(range(1, len(runs)+1)))
+    t = f"You currently died to: {runs[0][4]}"
+
+    line_chart = generate_line_graph([scores], ["Scores"], list(range(1, len(runs)+1)), "Scores Over Runs")
+    line_chart2 = generate_line_graph([jumps, squats, dodges], ["Jumps", "Squats", "Dodge"], list(range(1, len(runs)+1)), "Actions Over Runs")
 
 
 
-    return (piechart1, piechart2, line_chart, s[:-1])
+    return (piechart1, piechart2, line_chart, line_chart2, s[:-1], t)
 
 
 def pie_chart_run(data):
@@ -75,7 +76,7 @@ def pie_chart_run(data):
 
     return img
 
-def generate_line_graph(datasets, labels, time_labels):
+def generate_line_graph(datasets, labels, time_labels, heading):
     plt.figure(figsize=(10, 5))
     
     for i, data in enumerate(datasets):
@@ -83,7 +84,7 @@ def generate_line_graph(datasets, labels, time_labels):
     
     plt.xlabel('time')
     plt.ylabel('Values')
-    plt.title('Game Metrics Over Runs')
+    plt.title(heading)
     plt.legend()
     
     buf = BytesIO()

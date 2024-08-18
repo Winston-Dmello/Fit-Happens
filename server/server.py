@@ -20,6 +20,8 @@ templates = Jinja2Templates(directory="templates")
 
 run = {}
 
+wait_for_game = asyncio.Event()
+
 global msg
 msg = None
 
@@ -90,6 +92,7 @@ async def web_socket(websocket: WebSocket):
                     run["Score"] = response["Score"]
                     run["Death"] = response["death"]
                     db.insert_run(run)
+                    wait_for_game.set()
                     response = None
             except asyncio.TimeoutError:
                 pass 
@@ -180,10 +183,9 @@ async def start():
     global game_started
     game_started=True
 
-    while True:
-        global game_running
-        if not game_running:
-            break
+    await wait_for_game.wait()
+    await asyncio.sleep(1)
+
     return JSONResponse({"success":"True"})
 
 if __name__ == "__main__":

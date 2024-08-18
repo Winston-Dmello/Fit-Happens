@@ -1,34 +1,38 @@
-{% extends "dashboard.html" %}
+{% extends "dashboard.html" %} 
 
 {% block anlay_head %}
-    <link rel="stylesheet" href="../static/startGame.css">
-{% endblock %}
-
+    <link rel="stylesheet" href="../static/startGame.css" />
+{% endblock %} 
 
 {% block dashboard_content %}
-    <div class="startGameDiv">
-        <img src="../static/title-removebg-preview.png" alt="Fit Happens">
-        <button class="start-Game-btn" onclick="handleClick()" id="startButton"><img class="img-btn" src="../static/start-bg.png" alt=""></button>
-    </div>
-    <script>
-        async function handleClick(){
-            const button = document.getElementById("startButton");
-            button.disabled = true;  // Disable the button initially
-            
-            try{
-                const response = await fetch("http://localhost:8000/start");  // Send a request to start the game
+<div class="startGameDiv">
+    <img src="../static/title-removebg-preview.png" alt="Fit Happens" />
+    <button class="start-Game-btn" onclick="handleClick()" id="startButton">
+        <img class="img-btn" src="../static/start-bg.png" alt="" />
+    </button>
+</div>
+<script>
+    async function handleClick() {
+        const button = document.getElementById("startButton");
+        button.disabled = true; // Disable the button initially
+
+        try {
+            const response = await fetch("http://192.168.193.27:8000/start"); // Send a request to start the game
+            if (response.ok) {
                 const data = await response.json();
-    
-                if(data.success === "True"){  // If the game has ended
-                    button.disabled = false;  // Re-enable the button
-                    window.location.href = "/load_analysis";  // Redirect to the analysis page
+
+                if (data.success === "True") {
+                    // If the game has ended
+                    button.disabled = false; // Re-enable the button
+                    window.location.href = "/load_analysis"; // Redirect to the analysis page
                 } else {
                     console.log("Success not true");
                 }
-            } catch(error) {
-                console.error("Fetch error: ", error);
-                button.disabled = true;  // Keep the button disabled in case of an error
             }
+        } catch (error) {
+            console.error("Fetch error: ", error);
+            button.disabled = true; // Keep the button disabled in case of an error
         }
-    </script>
+    }
+</script>
 {% endblock %}

@@ -23,6 +23,22 @@
     align-items: center;
     flex-direction: column;
 }
+.g3{
+    grid-row: 2;
+    grid-column: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.g4{
+    grid-row: 2;
+    grid-column: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
 .cur-run{
     margin-left: 2vw;
 }
