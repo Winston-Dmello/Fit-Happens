@@ -358,7 +358,7 @@ class Pose:
                             data = {"Pose": estimated_pose}
                             try:
                                 response = requests.post(
-                                    "http://192.168.78.208:8000/message", json=data
+                                    "http://localhost:8000/message", json=data
                                 )
                                 response.raise_for_status()
                                 print(f"Successfully sent pose: {estimated_pose}")

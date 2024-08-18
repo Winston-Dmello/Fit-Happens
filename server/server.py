@@ -4,6 +4,9 @@ from fastapi.responses import JSONResponse, HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import uvicorn
+import subprocess
+
+
 from models import *
 from database import DB
 
@@ -22,6 +25,7 @@ spawn = None
 @app.websocket("/ws")
 async def web_endpoint(websocket: WebSocket):
     await websocket.accept()
+    process = subprocess.Popen(["python3.10", "../MrPose/mrpose.py", "-v", "/dev/video1"])
     try:
         while True:
             global msg
@@ -37,6 +41,8 @@ async def web_endpoint(websocket: WebSocket):
                 pass 
     except WebSocketDisconnect:
         print("Connection disconnected")
+    if process:
+        process.kill()
 
 @app.websocket("/ws2")
 async def web_socket(websocket: WebSocket):
